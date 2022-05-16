@@ -1,35 +1,35 @@
-package com.platzimarket.persistence.entity;
+package com.platzi.market.persistence.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name="compras")
+@Table(name = "compras")
 public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_compra")
+    @Column(name = "id_compra")
     private Integer idCompra;
 
-    @Column(name="id_cliente")
-    private Integer idcliente;
+    @Column(name = "id_cliente")
+    private String idCliente;
 
     private LocalDateTime fecha;
 
-    @Column(name="medio_pago")
+    @Column(name = "medio_pago")
     private String medioPago;
 
     private String comentario;
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id",insertable = false,updatable = false)
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "producto")
-    private List<ComprasProducto> listProductos;
+    private List<ComprasProducto> productos;
 
     public Integer getIdCompra() {
         return idCompra;
@@ -39,12 +39,12 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public Integer getIdcliente() {
-        return idcliente;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdcliente(Integer idcliente) {
-        this.idcliente = idcliente;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public LocalDateTime getFecha() {
@@ -77,5 +77,21 @@ public class Compra {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
     }
 }

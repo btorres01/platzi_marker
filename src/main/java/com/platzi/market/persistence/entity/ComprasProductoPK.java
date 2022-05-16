@@ -1,27 +1,16 @@
-package com.platzimarket.persistence.entity;
+package com.platzi.market.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
 public class ComprasProductoPK implements Serializable {
-
     @Column(name = "id_compra")
     private Integer idCompra;
 
     @Column(name = "id_producto")
     private Integer idProducto;
-
-    @ManyToOne
-    @JoinColumn(name = "id_compra", insertable = false, updatable = false)
-    private Compra compra;
-
-    @ManyToOne
-    @JoinColumn(name = "id_producto", insertable = false, updatable = false)
-    private Producto producto;
 
     public Integer getIdCompra() {
         return idCompra;

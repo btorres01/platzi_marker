@@ -1,41 +1,35 @@
-package com.platzimarket.persistence.entity;
-
-import org.w3c.dom.Text;
+package com.platzi.market.persistence.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name="productos")
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_producto")
+    @Column(name = "id_producto")
     private Integer idProducto;
 
     private String nombre;
 
-    @Column(name="id_categoria")
+    @Column(name = "id_categoria")
     private Integer idCategoria;
 
-    @Column(name="codigo_barras")
+    @Column(name = "codigo_barras")
     private String codigoBarras;
 
-    @Column(name="precio_venta")
+    @Column(name = "precio_venta")
     private Double precioVenta;
 
-    @Column(name="cantidad_stock")
+    @Column(name = "cantidad_stock")
     private Integer cantidadStock;
 
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name="id_categoria", insertable = false, updatable = false)//no se borra, edita, crea una nueva categoria
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
-
-    @OneToMany(mappedBy = "compra")
-    private List<ComprasProducto> listCompras;
 
     public Integer getIdProducto() {
         return idProducto;
@@ -91,5 +85,13 @@ public class Producto {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
