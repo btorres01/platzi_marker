@@ -21,15 +21,17 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/find/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable("productId") int productId) {
-        return productService.getProduct(productId).map(product -> new ResponseEntity<>(product, HttpStatus.OK))
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable("id") int productId) {
+        return productService.getProduct(productId)
+                .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/category/find/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
-        return productService.getByCategory(categoryId).map(products -> new ResponseEntity<>(products, HttpStatus.OK))
+        return productService.getByCategory(categoryId)
+                .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -38,11 +40,11 @@ public class ProductController {
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{productId}")
-    public ResponseEntity delete(@PathVariable("productId") int productId) {
-        if( productService.delete(productId)){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable("id") int productId) {
+        if (productService.delete(productId)) {
             return new ResponseEntity(HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
